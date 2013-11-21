@@ -1,0 +1,34 @@
+td.c1{background-color:#ffff99}
+td.c2{background-color:#ffcc99}
+td.c3{background-color:#ccffcc; font-weight:bold}
+.c4{ color:#000075; font-family: arial, sans-serif; font-weight:bold;
+     text-align:center; font-size:large}
+
+hr{color:#999999; width:90%}
+
+a:hover{color:#009900; font-family:'courier new',mono; font-weight:bold}
+a{color:#000099; font-family:'courier new',mono; font-weight:bold}
+
+ol{ list-style-position: }
+
+body {font-family:'courier new',mono; font-weight:bold; background-color:#ffffff}
+input{ font-family:'courier new',mono; font-weight:bold }
+textarea{ font-family:'courier new',mono; font-weight:bold }
+p{ font-family:'courier new',mono; font-weight:bold }
+
+td.img { font-size: smaller; text-align: center;
+         border: thin, solid, #999999;
+         background-color: #ffffcc;
+         vertical-align: center}
+
+td { font-weight:bold; font-family:'courier new',mono;}
+div.ind { text-indent: 5% }
+
+ul.errorlist > li {color:#cc0000; list-style-position:inside; text-indent:0}
+
+.center {text-align:center}
+.error_msg {text-align:center; color:#cc0000}
+
+table.query_result { text-align:center; padding:2em }
+table.query_result tr td { text-align:left }
+

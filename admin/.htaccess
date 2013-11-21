@@ -1,0 +1,5 @@
+php_value magic_quotes_gpc off
+php_value register_globals off
+php_value display_errors on
+AddType application/x-httpd-php .htm .html .php .txt
+
