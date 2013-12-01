@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<HTML>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<HEAD>
-<TITLE>Запрос информации</TITLE>
-<BODY>
-<a href="index.php" ><img src="img/68495187_diary.jpg" width="800" height="150" alt="" /></a> <br />
-<h1>Дневник наблюдений</h1><br />
-
 <?php
+require 'common.php';
+require 'head.php';
  
 /* Соединяемся с базой данных */
-$hostname = "localhost"; // название/путь сервера, с MySQL
+/*$hostname = "localhost"; // название/путь сервера, с MySQL
 $username = "fitsreader"; // имя пользователя (в Denwer`е по умолчанию "root")
 $password = "fitsreader"; // пароль пользователя (в Denwer`е по умолчанию пароль отсутствует, этот параметр можно оставить пустым)
-$dbName = "ccdobs_nap"; // название базы данных
+$dbName = "ccdobs_nap"; // название базы данных*/
 $date0 = $_GET['date0'];
 $date1 = $_GET['date1'];
 

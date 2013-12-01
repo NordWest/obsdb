@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<HTML>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<HEAD>
-<TITLE>Запрос информации</TITLE>
-<script language="JavaScript" 
-	type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-<script language="javascript" type="text/javascript" src="http://rche.ru/examples/cal.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-$('#calendar').simpleDatepicker();  // Привязать вызов календаря к полю с CSS идентификатором #calendar
-});
-</script>
-<BODY>
-<a href="index.php" ><img src="img/68495187_diary.jpg" width="800" height="150" alt="" /></a> <br />
-<h1>Дневник наблюдений</h1><br />
+<?php
+include './head.php';
+?>
 
 <?php
  
@@ -21,7 +8,7 @@ $('#calendar').simpleDatepicker();  // Привязать вызов кален�
 $hostname = "localhost"; // название/путь сервера, с MySQL
 $username = "fitsreader"; // имя пользователя (в Denwer`е по умолчанию "root")
 $password = "fitsreader"; // пароль пользователя (в Denwer`е по умолчанию пароль отсутствует, этот параметр можно оставить пустым)
-$dbName = "ccdobs_nap"; // название базы данных
+$dbName = "ccdobsDB_nap"; // название базы данных
  
 /* Таблица MySQL, в которой хранятся данные */
 $table = "fitsheader";
@@ -98,7 +85,7 @@ while ($row = mysql_fetch_array($res)) {
 echo ("
  
 <h3>Запрос наблюдений: </h3>
-<form action=\"ccdobs.php\">
+<form action=\"dairy.php\">
   date0<input id=\"date0\" name=\"date0\" value=\"".$date0."\" type=\"text\"/><br>
   date1<input id=\"date1\" name=\"date1\" value=\"".$date1."\" type=\"text\"/><br>
   <input type=\"submit\" text=\"Запрос\"/>
@@ -106,6 +93,21 @@ echo ("
  
 
 ");
+
+echo ("
+ 
+<h3>Запрос наблюдений объекта: </h3>
+<form action=\"ccdobs.php\">
+  Начало<input id=\"date0\" name=\"date0\" value=\"".$date0."\" type=\"text\"/><br>
+  Конец <input id=\"date1\" name=\"date1\" value=\"".$date1."\" type=\"text\"/><br>
+  Объект<input id=\"target\" name=\"target\" value=\"".$target."\" type=\"text\"/><br>
+  <input type=\"submit\" text=\"Запрос\"/>
+</form>
+ 
+
+");
+
+
  
 /* Закрываем соединение */
 mysql_close();

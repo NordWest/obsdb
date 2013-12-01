@@ -1,36 +1,6 @@
 <?
-function deg_to_hms($deg)
-{
-	settype($h, "integer");
-	settype($m, "integer");
-	settype($s, "double");
-	settype($str, "string");
-	$deg = $deg/15;
-	$h = floor($deg);
- 	$deg = ($deg-$h)*60;
- 	$m = floor($deg);
- 	$deg = ($deg-$m)*60;
- 	$s = $deg;
- 	$str = "";
- 	$str = sprintf("%02d:%02d:%05.3f", $h, $m, $s);
- 	return $str;
-}
-
-function deg_to_gms($deg)
-{
-	settype($h, "integer");
-	settype($m, "integer");
-	settype($s, "double");
-	settype($str, "string");
-	$h = floor($deg);
- 	$deg = abs(($deg-$h)*60);
- 	$m = floor($deg);
- 	$deg = ($deg-$m)*60;
- 	$s = $deg;
- 	$str = "";
- 	$str = sprintf("%02d:%02d:%05.3f", $h, $m, $s);
- 	return $str;
-}
+require 'common.php';
+require 'head.php';
 
  
 /* Соединяемся с базой данных */
@@ -62,12 +32,6 @@ $res = mysql_query($query) or die(mysql_error());
  
 /* Выводим данные из таблицы */
 echo ("
-<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
-<html xmlns=\"http://www.w3.org/1999/xhtml\">
- 
-<head>
- 
-    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />
  
     <title>Наблюдения за $obsDate</title>
  
