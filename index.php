@@ -43,7 +43,14 @@ echo ("
  */
  
  $dayNum=0;
+ $row = mysql_fetch_array($res);
+ $date1 = $row['obsDate'];
+ $pos = mysql_num_rows($res) - 1;
+ mysql_data_seek($res, $pos);
+ $row = mysql_fetch_array($res);
+ $date0 = $row['obsDate'];
 /* Цикл вывода данных из базы конкретных полей */
+ /*
 while ($row = mysql_fetch_array($res)) {
 	
 	if($dayNum==0) $date1=$row['obsDate'];
@@ -70,7 +77,7 @@ while ($row = mysql_fetch_array($res)) {
     		{
     			$row2 = mysql_fetch_array($res2);
     			$observer = $row2['realName'];
-    		}*/
+    		}/
     		//echo "<a href=\"observer.php?observer='".$observer."'\">".$observer."\n";
     		//echo $observer." ";
     		
@@ -78,7 +85,7 @@ while ($row = mysql_fetch_array($res)) {
     //echo "</td>\n";
 }
 
-
+*/
  
 //echo ("</table>\n");
 
@@ -93,6 +100,8 @@ echo ("
  
 
 ");
+
+$target = '*';
 
 echo ("
  

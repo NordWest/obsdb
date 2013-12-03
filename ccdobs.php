@@ -31,7 +31,27 @@ $query = "SELECT * FROM $table WHERE obsDate > '$date0' and obsDate < '$date1' a
  
 /* Выполняем запрос. Если произойдет ошибка - вывести ее. */
 $res = mysql_query($query) or die(mysql_error());
- 
+
+$rNum = mysql_num_rows($res);
+
+echo "\n";
+echo 'Найдено '.$rNum.' записей';
+
+$myfile = tmpfile();
+//echo $myfile;
+
+while ($row = mysql_fetch_array($res)) {
+    $tline = '<br />'.$row['originName']."\n";
+    //echo $tline;
+    fwrite($myfile, $tline);
+}
+//fclose($myfile);
+fseek($myfile, 0);
+//echo '<br />строк '.fseek($myfile, 0);
+//if (file_exists($myfile)) echo '<br />file exist ';
+file_force_download($myfile);
+//readfile($myfile);
+
 /* Выводим данные из таблицы */
 /*
 echo ("
