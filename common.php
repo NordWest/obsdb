@@ -7,6 +7,7 @@ $password = "fitsreader"; // пароль пользователя (в Denwer`е
 $dbName = "ccdobsDB_nap"; // название базы данных
 
 
+
 function deg_to_hms($deg)
 {
 	settype($h, "integer");
@@ -65,3 +66,4 @@ function file_force_download($file) {
       echo 'file not exist';
   }
 }
+?>

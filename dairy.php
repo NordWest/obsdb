@@ -72,7 +72,7 @@ echo ("</table>\n");
  
 /* Закрываем соединение */
 mysql_close();
- 
+ require 'tail.php';
 
 ?>
 
