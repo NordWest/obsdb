@@ -21,7 +21,7 @@ $table = "fitsheader";
 $tableObs = "observers";
  
 /* Создаем соединение */
-mysql_connect($hostname, $username, $password) or die ("Не могу создать соединение");
+$lnk = mysql_connect($hostname, $username, $password) or die ("Не могу создать соединение");
  
 /* Выбираем базу данных. Если произойдет ошибка - вывести ее */
 mysql_select_db($dbName) or die (mysql_error());

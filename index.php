@@ -1,8 +1,7 @@
 <?php
-include './head.php';
-?>
+require 'head.php';
+require 'common.php';
 
-<?php
  
 /* Соединяемся с базой данных */
 $hostname = "localhost"; // название/путь сервера, с MySQL
@@ -29,10 +28,10 @@ $res = mysql_query($query) or die(mysql_error());
 /* Выводим данные из таблицы */
 
 
-/*
+
 echo ("
  
-<h3>Имеющиеся наблюдения в базе: </h3>
+<h3>Последние наблюдения: </h3>
  
 <table border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
  <tr style=\"border: solid 1px #000\">
@@ -40,7 +39,7 @@ echo ("
   <td align=\"center\"><b>Наблюдетель </b></td>
  </tr>
 ");
- */
+ 
  
  $dayNum=0;
  $row = mysql_fetch_array($res);
@@ -50,11 +49,13 @@ echo ("
  $row = mysql_fetch_array($res);
  $date0 = $row['obsDate'];
 /* Цикл вывода данных из базы конкретных полей */
- /*
+ //$rPos=0;
 while ($row = mysql_fetch_array($res)) {
 	
 	if($dayNum==0) $date1=$row['obsDate'];
-	else if($row['obsDate']>0) $date0=$row['obsDate'];
+	//else if($row['obsDate']>0) $date0=$row['obsDate'];
+        
+        if($daysNum>5)            break;
 	$dayNum++;
 	
     //echo "<tr>\n";

@@ -66,4 +66,9 @@ function file_force_download($file) {
       echo 'file not exist';
   }
 }
+
+function getObserverList($lnk, $realName)
+{
+    mysql_select_db('foo', $lnk) or die ('Can\'t use foo : ' . mysql_error());
+}
 ?>
