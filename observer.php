@@ -49,15 +49,18 @@ while ($row = mysql_fetch_array($res)) {
 //	obsList[] = $row['observer'];	
 	
 	}
-        $wrarr[] = implode(" OR ", $names);
-        $wrarr[] = "obsDate<$date1";
-        $wrarr[] = "obsDate>$date0";
-        $wrstr = implode(" AND ", $wrarr);
+        $wrarr = implode(" OR ", $names);
+        $wrarr1[] = "($wrarr)";
+        $wrarr1[] = "obsDate<$date1";
+        $wrarr1[] = "obsDate>$date0";
+        $wrstr = implode(" AND ", $wrarr1);
 $query = "SELECT DISTINCT obsDate, observer FROM $table WHERE $wrstr order by obsDate"; 	
 //$query = "SELECT DISTINCT obsDate, observer FROM fitsheader WHERE `observer`='Berezhnoy' and obsDate<'2012-05-09' and obsDate<'2012-05-09'";
 //echo($query);
 
-$res1 = mysql_query($query) or die(mysql_error());
+$res = mysql_query($query) or die(mysql_error());
+
+echo("<h3>Наблюдения $observerName за период $date0 - $date1</h3>");
 
 echo("
 
@@ -71,11 +74,11 @@ echo("
 ");
  
 /* Цикл вывода данных из базы конкретных полей */
-while ($row = mysql_fetch_array($res1)) {
+while ($row = mysql_fetch_array($res)) {
 
 $obsDate1 = $row['obsDate'];
 $observer = "'".$row['observer']."'";
-	$query1 = "SELECT obsDate, DATETIMEOBS, observer, mjdEpoch, exptime FROM $table WHERE observer=$observer and obsDate='$obsDate1' order by DATETIMEOBS";
+	$query1 = "SELECT obsDate, DATETIMEOBS, observer, mjdEpoch, exptime FROM $table WHERE ($wrarr) and obsDate='$obsDate1' order by DATETIMEOBS";
 //echo $query1."<br>";
 	$res1 = mysql_query($query1) or die(mysql_error());
 	$obsNum1=0;

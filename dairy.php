@@ -9,6 +9,7 @@ $password = "fitsreader"; // пароль пользователя (в Denwer`е
 $dbName = "ccdobs_nap"; // название базы данных*/
 $date0 = $_GET['date0'];
 $date1 = $_GET['date1'];
+$target = $_GET['target'];
 
  
 /* Таблица MySQL, в которой хранятся данные */
@@ -25,7 +26,7 @@ mysql_query('set names utf8');
  
 /* Составляем запрос для извлечения данных из полей "name", "email", "theme",
 "message", "data" таблицы "test_table" */
-$query = "SELECT DISTINCT obsDate FROM $table WHERE obsDate > '$date0' and obsDate < '$date1' order by obsDate desc";
+$query = "SELECT DISTINCT obsDate FROM $table WHERE obsDate > '$date0' and obsDate < '$date1' and target LIKE '%$target%' order by obsDate desc";
 //echo $query;
  
 /* Выполняем запрос. Если произойдет ошибка - вывести ее. */

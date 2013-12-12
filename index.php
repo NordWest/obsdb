@@ -13,8 +13,8 @@ $dbName = "ccdobsDB_nap"; // название базы данных
 $table = "fitsheader";
  
 /* Создаем соединение */
-mysql_connect($hostname, $username, $password) or die ("Не могу создать соединение");
- 
+$lnk = mysql_connect($hostname, $username, $password) or die ("Не могу создать соединение");
+mysql_set_charset('utf8');
 /* Выбираем базу данных. Если произойдет ошибка - вывести ее */
 mysql_select_db($dbName) or die (mysql_error());
  
@@ -42,53 +42,50 @@ echo ("
  
  
  $dayNum=0;
+ $dayLast=5;
  $row = mysql_fetch_array($res);
  $date1 = $row['obsDate'];
  $pos = mysql_num_rows($res) - 1;
  mysql_data_seek($res, $pos);
  $row = mysql_fetch_array($res);
  $date0 = $row['obsDate'];
+ mysql_data_seek($res, 0);
+ 
 /* Цикл вывода данных из базы конкретных полей */
  //$rPos=0;
 while ($row = mysql_fetch_array($res)) {
-	
-	if($dayNum==0) $date1=$row['obsDate'];
-	//else if($row['obsDate']>0) $date0=$row['obsDate'];
-        
-        if($daysNum>5)            break;
-	$dayNum++;
-	
-    //echo "<tr>\n";
-    //echo "<td><a href=\"ccdobs.php?obsDate='".$row['obsDate']."'\">".$row['obsDate']."</td>\n";
+
+    $dayNum++;
+    if ($dayNum > $dayLast) {
+        break;
+    }
     $obsDate = $row['obsDate'];
+//    echo "<tr>\n";
+//    echo "<td><a href=\"ccdobs.php?obsDate='".$row['obsDate']."'\">".$row['obsDate']."</td>\n";
+
     $query = "SELECT DISTINCT observer FROM $table WHERE obsDate='$obsDate'";
-  //  echo $query;
+    //echo $query;
 
     $res1 = mysql_query($query) or die(mysql_error());
     //echo "<td>";
-    while ($row1 = mysql_fetch_array($res1)) {
-    	$observer = $row1['observer'];
-    	/*$query = "SELECT realName FROM observers WHERE observer='$observer'";
-    	//echo $query;
-    	//echo "</td>\n";
-    	$res2 = mysql_query($query) or die(mysql_error());
-    	//echo $res2;
-    	//echo "</td>\n";
- /*   	if($res2!='') 
-    		{
-    			$row2 = mysql_fetch_array($res2);
-    			$observer = $row2['realName'];
-    		}/
-    		//echo "<a href=\"observer.php?observer='".$observer."'\">".$observer."\n";
-    		//echo $observer." ";
-    		
-    	}
-    //echo "</td>\n";
+    $row1 = mysql_fetch_array($res1);
+    $observer = $row1['observer'];
+    //echo "<td>".$observer;
+    $realName = getRealName($lnk, $observer);
+    //echo "<td>".$realName;
+    
+    echo "<tr>";
+    echo "<td><a href=\"daily.php?obsDate='".$obsDate."'\">".$obsDate."</td>\n";
+    echo "<td>";
+    echo ("<a href=\"observer.php?observerName='".$realName."'&date0='".$date0."'&date1='".$date1."'\">".$realName."</a>\n");
+    echo "</td>";
+    echo "</tr>";
 }
+echo ("</table>\n");
 
-*/
  
 //echo ("</table>\n");
+$target = '';
 
 echo ("
  
@@ -96,12 +93,14 @@ echo ("
 <form action=\"dairy.php\">
   date0<input id=\"date0\" name=\"date0\" value=\"".$date0."\" type=\"text\"/><br>
   date1<input id=\"date1\" name=\"date1\" value=\"".$date1."\" type=\"text\"/><br>
-  <input type=\"submit\" text=\"Запрос\"/>
+  <input type=\"submit\" text=\"Запрос\" value=\"Выбрать по дате\"/><br>
+  Объект<input id=\"target\" name=\"target\" value=\"".$target."\" type=\"text\"/><br>
+  <input type=\"submit\" text=\"Запрос\" value=\"Выбрать по дате для объекта\"/>
 </form>
  
 
 ");
-
+/*
 $target = '';
 
 echo ("
@@ -116,7 +115,7 @@ echo ("
  
 
 ");
-
+*/
 
  
 /* Закрываем соединение */
@@ -127,8 +126,3 @@ mysql_close();
 
 
 
-
-
-
-</BODY>
-</HTML>

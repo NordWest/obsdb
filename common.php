@@ -69,6 +69,36 @@ function file_force_download($file) {
 
 function getObserverList($lnk, $realName)
 {
-    mysql_select_db('foo', $lnk) or die ('Can\'t use foo : ' . mysql_error());
+    $tableObs = 'observers';
+    //mysql_select_db($tableObs, $lnk) or die ('Can\'t use foo : ' . mysql_error());
+    mysql_set_charset('utf8', $lnk);
+    $query1 = "SELECT * FROM $tableObs WHERE realName=$realName";
+    
+    $res = mysql_query($query1, $lnk) or die(mysql_error());
+    
+    while ($row = mysql_fetch_array($res)) {
+    
+    $names[] = $row['observer'];
+        	
+	}
+    return $names;
+}
+
+function getRealName($lnk, $obsName)
+{
+    $tableObs = 'observers';
+    //mysql_select_db($tableObs, $lnk) or die ('Can\'t use foo : ' . mysql_error());
+    mysql_set_charset('utf8', $lnk);
+    $query = "SELECT realName FROM observers WHERE observer='$obsName'";
+    
+    //echo "<td> $query";
+    $res = mysql_query($query, $lnk) or die(mysql_error());
+    
+    while ($row = mysql_fetch_array($res)) {
+    
+    return $row['realName'];
+        	
+	}
+//    return $names;
 }
 ?>
