@@ -17,7 +17,7 @@ $obsDate=$_GET['obsDate'];
 $table = "fitsheader";
  
 /* Создаем соединение */
-mysql_connect($hostname, $username, $password) or die ("Не могу создать соединение");
+$lnk = mysql_connect($hostname, $username, $password) or die ("Не могу создать соединение");
  
 /* Выбираем базу данных. Если произойдет ошибка - вывести ее */
 mysql_select_db($dbName) or die (mysql_error());
@@ -60,7 +60,7 @@ td { padding: 3px; text-align: center; vertical-align: middle; }
   <td align=\"center\"><b>Объект </b></td>
   <td align=\"center\"><b>RA </b></td>
   <td align=\"center\"><b>DEC </b></td>
-  <td align=\"center\"><b>exptime </b></td>
+  <td align=\"center\"><b>Экспозиция</b></td>
   <td align=\"center\"><b>Наблюдетель </b></td>
  </tr>
 ");
@@ -100,6 +100,7 @@ while ($row = mysql_fetch_array($res)) {
     		}
     }
     
+    $realName = getRealName($lnk, $row['observer']);
     	
 	
     echo "<tr>\n";
@@ -109,7 +110,7 @@ while ($row = mysql_fetch_array($res)) {
     echo "<td>".deg_to_hms($row['ra'])."</td>\n";
     echo "<td>".deg_to_gms($row['de'])."</td>\n";
     echo "<td>".$row['exptime']."</td>\n";
-    echo "<td>".$row['observer']."</td>\n";
+    echo "<td>".$realName."</td>\n";
     echo "</tr>";
     
 }
@@ -117,7 +118,7 @@ while ($row = mysql_fetch_array($res)) {
 
 
 echo "<tr style=\"border: solid 1px #000 \" bgcolor=\"#7de890\">";
-echo "<td colspan=6>Итого:<br></tr>";
+echo "<td colspan=7>Итого:<br></tr>";
 echo "<tr style=\"border: solid 1px #000 \">";
 echo "<td colspan=6>Общая длительность наблюдений (часов)</td><td>".sprintf('%5.2f',(($tend-$tbeg)*24.0))."</td></tr>";
 
