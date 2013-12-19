@@ -101,4 +101,3 @@ function getRealName($lnk, $obsName)
 	}
 //    return $names;
 }
-?>

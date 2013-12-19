@@ -10,7 +10,7 @@ $password = "fitsreader"; // пароль пользователя (в Denwer`е
 $dbName = "ccdobs_nap"; // название базы данных
  */
 $obsDate=$_GET['obsDate'];
-
+$target = $_GET['target'];
 
  
 /* Таблица MySQL, в которой хранятся данные */
@@ -25,7 +25,7 @@ mysql_select_db($dbName) or die (mysql_error());
 /* Составляем запрос для извлечения данных из полей "name", "email", "theme",
 "message", "data" таблицы "test_table" */
 //$query = "SELECT obsDate, DATETIMEOBS, Target, ra, de, observer FROM $table WHERE obsDate=$obsDate order by DATETIMEOBS";
-$query = "SELECT * FROM $table WHERE obsDate=$obsDate order by DATETIMEOBS";
+$query = "SELECT * FROM $table WHERE obsDate=$obsDate  and target LIKE '%$target%' order by DATETIMEOBS";
 
 /* echo($query);*/
  
@@ -51,7 +51,12 @@ td { padding: 3px; text-align: center; vertical-align: middle; }
  
 <body>
 <a href=\"index.php\" ><img src=\"img/68495187_diary.jpg\" width=\"800\" height=\"150\" alt=\"\" /></a> <br />
-<h3>Наблюдения за $obsDate</h3>
+<h3>Наблюдения за $obsDate</h3>");
+
+echo "<br>";
+echo "<a href=\"get_list.php?obsDate=$obsDate&target=$target\">get__local_list</a>";
+
+echo(" 
  
 <table border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
  <tr style=\"border: solid 1px #000\">
@@ -113,6 +118,8 @@ while ($row = mysql_fetch_array($res)) {
     echo "<td>".$realName."</td>\n";
     echo "</tr>";
     
+    $originList[] = $row['originName'];
+    
 }
 
 
@@ -140,6 +147,9 @@ echo ("</table>\n");
  
 /* Закрываем соединение */
 mysql_close();
+
+
+
  
 /* Выводим ссылку возврата */
 //echo ("<div style=\"text-align: center; margin-top: 10px;\"><a href=\"index.php\">На главную</a></div>");
