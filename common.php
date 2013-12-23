@@ -101,3 +101,32 @@ function getRealName($lnk, $obsName)
 	}
 //    return $names;
 }
+
+function getRealNames($lnk, $obsName)
+{
+    $tableObs = 'observers';
+    //mysql_select_db($tableObs, $lnk) or die ('Can\'t use foo : ' . mysql_error());
+    mysql_set_charset('utf8', $lnk);
+    
+    $arrNames = explode(",", $obsName);
+    
+    foreach ($arrNames as &$value) {
+        $value = trim($value);
+        $realNames[] = getRealName($lnk, $value);
+    }
+    
+    return $realNames;
+}
+
+function getSeasonsFTP($lnk)
+{
+    $tableObs = 'seasons';
+    $query = "SELECT name, ftpPath FROM $tableObs";
+    
+    $res = mysql_query($query, $lnk) or die(mysql_error());
+    
+    while ($row = mysql_fetch_array($res)) {
+        $seasonFTP[$row['name']] = $row['ftpPath'];
+    }
+    return $seasonFTP;
+}

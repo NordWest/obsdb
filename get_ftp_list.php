@@ -12,16 +12,20 @@ $lnk = mysql_connect($hostname, $username, $password) or die ("Не могу с�
  
 /* Выбираем базу данных. Если произойдет ошибка - вывести ее */
 mysql_select_db($dbName) or die (mysql_error());
+
+$seas = getSeasonsFTP($lnk);
+
+/*
  
 /* Составляем запрос для извлечения данных из полей "name", "email", "theme",
-"message", "data" таблицы "test_table" */
+"message", "data" таблицы "test_table" /
 //$query = "SELECT obsDate, DATETIMEOBS, Target, ra, de, observer FROM $table WHERE obsDate=$obsDate order by DATETIMEOBS";
 //$query = "SELECT * FROM $table WHERE obsDate=$obsDate  and target LIKE '%$target%' order by DATETIMEOBS";
 $query = "SELECT * FROM $table WHERE obsDate=$obsDate and target LIKE '%$target%' order by DATETIMEOBS";
 //$query = "SELECT DISTINCT obsDate FROM $table WHERE obsDate > '$date0' and obsDate < '$date1' and target LIKE '%$target%' order by obsDate desc";
  //echo($query);
  
-/* Выполняем запрос. Если произойдет ошибка - вывести ее. */
+/* Выполняем запрос. Если произойдет ошибка - вывести ее. /
 $res = mysql_query($query) or die(mysql_error());
 $mfilename = "./$obsDate.txt";
 $mfilename = str_replace("'", '', $mfilename);
@@ -60,4 +64,4 @@ if (ob_get_level()) {
 }
 
 fclose($myfile);
-unlink($mfilename);
+unlink($mfilename);*/

@@ -90,6 +90,7 @@ $target = '';
 echo ("
  
 <h3>Запрос наблюдений: </h3>
+<form action=\"dairy.php\">
   Начало<input id=\"date0\" name=\"date0\" value=\"".$date0."\" type=\"text\"/><br>
   Конец<input id=\"date1\" name=\"date1\" value=\"".$date1."\" type=\"text\"/><br>
   Объект<input id=\"target\" name=\"target\" value=\"".$target."\" type=\"text\"/><br>
@@ -120,7 +121,7 @@ echo ("
 mysql_close();
  
 
-?>
+
 
 
 

@@ -10,8 +10,8 @@ $password = "fitsreader"; // пароль пользователя (в Denwer`е
 $dbName = "ccdobs_nap"; // название базы данных
  */
 $obsDate=$_GET['obsDate'];
-$target = $_GET['target'];
-
+//$target = $_GET['target'];
+$target = str_replace("'", "", $_GET['target']);
  
 /* Таблица MySQL, в которой хранятся данные */
 $table = "fitsheader";
@@ -34,27 +34,9 @@ $res = mysql_query($query) or die(mysql_error());
  
 /* Выводим данные из таблицы */
 echo ("
- 
-    <title>Наблюдения за $obsDate</title>
- 
-<style type=\"text/css\">
-<!--
-body { font: 12px Georgia; color: #666666; }
-h3 { font-size: 16px; text-align: center; }
-table { width: 700px; border-collapse: collapse; margin: 0px auto; background: #E6E6E6; }
-td { padding: 3px; text-align: center; vertical-align: middle; }
-.buttons { width: auto; border: double 1px #666666; background: #D6D6D6; }
--->
-</style>
- 
-</head>
- 
-<body>
-<a href=\"index.php\" ><img src=\"img/68495187_diary.jpg\" width=\"800\" height=\"150\" alt=\"\" /></a> <br />
 <h3>Наблюдения за $obsDate</h3>");
 
-echo "<br>";
-echo "<a href=\"get_list.php?obsDate=$obsDate&target=$target\">get__local_list</a>";
+echo "<a href=\"get_local_list.php?obsDate=$obsDate&target=$target\">get__local_list</a>";
 
 echo(" 
  
@@ -66,7 +48,7 @@ echo("
   <td align=\"center\"><b>RA </b></td>
   <td align=\"center\"><b>DEC </b></td>
   <td align=\"center\"><b>Экспозиция</b></td>
-  <td align=\"center\"><b>Наблюдетель </b></td>
+  <td align=\"center\"><b>Наблюдатель </b></td>
  </tr>
 ");
  
@@ -98,14 +80,15 @@ while ($row = mysql_fetch_array($res)) {
     	
     	$tend = $time1 + $expTime/2.0;
     	
-    	if($dt1>=(3.1*$expTime))
+    	if($dt1>=(2.1*$expTime))
     	{
     		echo "<tr style=\"border: solid 1px #000 \" bgcolor=\"#7de890\"><td colspan=\"7\"></td></tr>\n";
     		$serieNum++;
     		}
     }
     
-    $realName = getRealName($lnk, $row['observer']);
+    $realNames = getRealNames($lnk, $row['observer']);
+    $realName = implode(", ", $realNames);
     	
 	
     echo "<tr>\n";

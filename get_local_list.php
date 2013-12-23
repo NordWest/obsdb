@@ -35,7 +35,7 @@ $myfile = fopen($mfilename, "a+");
 
 while ($row = mysql_fetch_array($res)) {
     
-    fwrite($myfile, $row['originName']);
+    fwrite($myfile, $row['relFileName']);
     fwrite($myfile, "\n");
 }
 

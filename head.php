@@ -13,7 +13,7 @@ $('#calendar').simpleDatepicker();  // Привязать вызов кален�
 });
 </script>
 <BODY>
-<a href=\"index.php\" ><img src=\"img/logo.jpg\" width=\"800\" height=\"150\" alt=\"\" /></a> <br />
+<a href=\"index.php\" ><img src=\"img/logo.jpg\" width=\"400\" height=\"250\" alt=\"\" /></a>
 <h1>Дневник наблюдений</h1><br />
 ");
 ?>
