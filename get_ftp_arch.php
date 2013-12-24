@@ -7,7 +7,9 @@ $obsDate=$_GET['obsDate'];
 $target = addslashes($_GET['target']);
 
 $table = "fitsheader";
- 
+
+set_time_limit(180);
+
 /* Создаем соединение */
 $lnk = mysql_connect($hostname, $username, $password) or die ("Не могу создать соединение");
  
@@ -46,5 +48,5 @@ while ($row = mysql_fetch_array($res)) {
 fseek($myfile, 0);*/
 //file_force_download($myfilename);
 
-fclose($myfile);
+//fclose($myfile);
 //unlink($myfilename);
