@@ -1,5 +1,5 @@
 <?php
-$dir = "/tmp/obsdb"; // Директория с файлами
+$dir = "/mnt/ccdobs/ccdobsDB/tmp"; // Директория с файлами
 $files = scandir( $dir ); // Прочёсываем директорию
 $time = time(); // Текущее время
 $life_file = 3600; // Время жизни файла в секундах
