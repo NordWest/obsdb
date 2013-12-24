@@ -28,7 +28,7 @@ $zip = new ZipArchive(); //Создаём объект для работы с ZI
 $zip->open($myfilename, ZIPARCHIVE::CREATE); //Открываем (создаём) архив archive.zip
 while ($row = mysql_fetch_array($res)) {
     $fileName = $seas[$row['season']].$row['relFileName'];
-    $zip->addFile($fileName);
+    $zip->addFile($fileName, $row['relFileName']);
 }
 $zip->close(); //Завершаем работу с архивом
 $myfilename = str_replace("/mnt/ccdobs", "ftp://".$servName, $myfilename);
