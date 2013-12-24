@@ -34,9 +34,9 @@ echo ("
 <h3>Последние наблюдения: </h3>
  
 <table border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
- <tr style=\"border: solid 1px #000\">
-  <td align=\"center\"><b>Дата наблюдения</b></td>
-  <td align=\"center\"><b>Наблюдетель </b></td>
+ <tr class=\"head\" style=\"border: solid 1px #000\">
+  <td width=\"100\"><b>Дата</b></td>
+  <td width=\"200\"><b>Наблюдетель </b></td>
  </tr>
 ");
  
@@ -74,7 +74,7 @@ while ($row = mysql_fetch_array($res)) {
     $realName = getRealName($lnk, $observer);
     //echo "<td>".$realName;
     
-    echo "<tr>";
+    echo "<tr class=\"body\">";
     echo "<td><a href=\"daily.php?obsDate='".$obsDate."'\">".$obsDate."</td>\n";
     echo "<td>";
     echo ("<a href=\"observer.php?observerName='".$realName."'&date0='".$date0."'&date1='".$date1."'\">".$realName."</a>\n");

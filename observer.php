@@ -105,7 +105,7 @@ $observer = "'".$row['observer']."'";
     echo "<tr>\n";
     echo "<td><a href=\"daily.php?obsDate='".$row['obsDate']."'\">".$row['obsDate']."</td>\n";
     echo "<td>".$obsNum1."</td>\n";
-echo "<td>".$dur1."</td>\n";
+echo "<td>".sprintf("%6.2f", $dur1)."</td>\n";
     echo "</tr>\n";
 }
 

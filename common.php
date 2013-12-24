@@ -130,3 +130,16 @@ function getSeasonsFTP($lnk)
     }
     return $seasonFTP;
 }
+
+function getSeasonsLocal($lnk)
+{
+    $tableObs = 'seasons';
+    $query = "SELECT name, localPath FROM $tableObs";
+    
+    $res = mysql_query($query, $lnk) or die(mysql_error());
+    
+    while ($row = mysql_fetch_array($res)) {
+        $seasonLoc[$row['name']] = $row['localPath'];
+    }
+    return $seasonLoc;
+}

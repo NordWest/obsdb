@@ -2,6 +2,9 @@
 echo("<!DOCTYPE html>
 <HTML>
 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
+<style type=\"text/css\">
+      @import url(\"mycss.css\");
+      </style>
 <HEAD>
 <TITLE>Запрос информации</TITLE>
 <script language=\"JavaScript\" 
@@ -13,7 +16,7 @@ $('#calendar').simpleDatepicker();  // Привязать вызов кален�
 });
 </script>
 <BODY>
+
 <a href=\"index.php\" ><img src=\"img/logo.jpg\" width=\"400\" height=\"250\" alt=\"\" /></a>
 <h1>Дневник наблюдений</h1><br />
 ");
-?>

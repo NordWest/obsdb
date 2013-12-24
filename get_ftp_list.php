@@ -1,5 +1,6 @@
 <?php
 require 'common.php';
+//require 'mathcap.php';
 //require 'head.php';
 
 $obsDate=$_GET['obsDate'];
@@ -15,53 +16,24 @@ mysql_select_db($dbName) or die (mysql_error());
 
 $seas = getSeasonsFTP($lnk);
 
-/*
- 
-/* Составляем запрос для извлечения данных из полей "name", "email", "theme",
-"message", "data" таблицы "test_table" /
-//$query = "SELECT obsDate, DATETIMEOBS, Target, ra, de, observer FROM $table WHERE obsDate=$obsDate order by DATETIMEOBS";
-//$query = "SELECT * FROM $table WHERE obsDate=$obsDate  and target LIKE '%$target%' order by DATETIMEOBS";
-$query = "SELECT * FROM $table WHERE obsDate=$obsDate and target LIKE '%$target%' order by DATETIMEOBS";
-//$query = "SELECT DISTINCT obsDate FROM $table WHERE obsDate > '$date0' and obsDate < '$date1' and target LIKE '%$target%' order by obsDate desc";
- //echo($query);
- 
-/* Выполняем запрос. Если произойдет ошибка - вывести ее. /
+/*$query = "SELECT value FROM settings WHERE name='servAddr'";
 $res = mysql_query($query) or die(mysql_error());
-$mfilename = "./$obsDate.txt";
-$mfilename = str_replace("'", '', $mfilename);
-$myfile = fopen($mfilename, "a+");
+$row = mysql_fetch_array($res);*/
+$servName = $_SERVER['SERVER_ADDR'].":".$_SERVER['SERVER_PORT'];
 
-//$myfile = tmpfile($mfilename);
-
-//$num_rows = mysql_num_rows($res);
-
-//echo("<br>num_rows: $num_rows<br>");
+$query = "SELECT * FROM $table WHERE obsDate=$obsDate and target LIKE '%$target%' order by DATETIMEOBS";
+ 
+$res = mysql_query($query) or die(mysql_error());
+$myfilename = tempnam("/tmp", str_replace("'", '', $obsDate)."_").".txt";
+$myfile = fopen($myfilename, "a+");
 
 while ($row = mysql_fetch_array($res)) {
-    
-    fwrite($myfile, $row['originName']);
+    $fileName = "ftp://$servName".$seas[$row['season']].$row['relFileName'];
+    fwrite($myfile, $fileName);
     fwrite($myfile, "\n");
 }
+fseek($myfile, 0);
 
-//echo '<br />строк '.fseek($myfile, 0);
-//fclose($myfile);
-if (file_exists($mfilename)) {
-if (ob_get_level()) {
-      ob_end_clean();
-    }
-    // заставляем браузер показать окно сохранения файла
-    
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename=' . basename($mfilename));
-    header('Content-Transfer-Encoding: binary');
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize($mfilename));
-    // читаем файл и отправляем его пользователю
-    readfile($mfilename);
-}
-
+file_force_download($myfilename);
 fclose($myfile);
-unlink($mfilename);*/
+unlink($myfilename);

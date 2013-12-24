@@ -36,12 +36,15 @@ $res = mysql_query($query) or die(mysql_error());
 echo ("
 <h3>Наблюдения за $obsDate</h3>");
 
+//require 'mathcap.php';
+
 echo "<a href=\"get_local_list.php?obsDate=$obsDate&target=$target\">get__local_list</a>";
+echo "<br><a href=\"get_ftp_list.php?obsDate=$obsDate&target=$target\">get__ftp_list</a>";
 
 echo(" 
  
 <table border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
- <tr style=\"border: solid 1px #000\">
+ <tr class=\"head\" style=\"border: solid 1px #000\">
   <td align=\"center\"><b>№ п/п</b></td>
   <td align=\"center\"><b>Дата наблюдения</b></td>
   <td align=\"center\"><b>Объект </b></td>
@@ -58,6 +61,8 @@ $tbeg = 0;
 $tend = 0;
 $i=0;
 $serieNum=1;
+$seas = getSeasonsFTP($lnk);
+$servName = $_SERVER['SERVER_ADDR'].":".$_SERVER['SERVER_PORT'];
 
 while ($row = mysql_fetch_array($res)) {
 
@@ -82,17 +87,20 @@ while ($row = mysql_fetch_array($res)) {
     	
     	if($dt1>=(2.1*$expTime))
     	{
-    		echo "<tr style=\"border: solid 1px #000 \" bgcolor=\"#7de890\"><td colspan=\"7\"></td></tr>\n";
+    		echo "<tr style=\"border: solid 1px #000 \" bgcolor=\"#7de890\"><td height=\"5\" colspan=\"7\"></td></tr>\n";
     		$serieNum++;
     		}
     }
     
     $realNames = getRealNames($lnk, $row['observer']);
     $realName = implode(", ", $realNames);
+    
+    $ftpFileName = "ftp://$servName".$seas[$row['season']].$row['relFileName'];
     	
-	
-    echo "<tr>\n";
-    echo "<td>".(++$i)."</td>\n";
+    echo "<tr class=\"body\">\n";
+    //echo "<a href=\"$ftpFileName>\"";
+    echo "<td style=\"cursor: pointer;\" onClick=\"location='$ftpFileName'\">".(++$i)."</td>\n";
+    //echo "</a>";
     echo "<td>".$row['DATETIMEOBS']."</td>\n";
     echo "<td>".$row['Target']."</td>\n";
     echo "<td>".deg_to_hms($row['ra'])."</td>\n";
@@ -100,6 +108,7 @@ while ($row = mysql_fetch_array($res)) {
     echo "<td>".$row['exptime']."</td>\n";
     echo "<td>".$realName."</td>\n";
     echo "</tr>";
+    
     
     $originList[] = $row['originName'];
     
