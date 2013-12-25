@@ -84,7 +84,7 @@ while ($row = mysql_fetch_array($res)) {
     	
     	if($dt1>=(2.1*$expTime))
     	{
-    		echo "<tr class=\"body\" style=\"border: solid 1px #000 \" bgcolor=\"#7de890\"><td height=\"5\" colspan=\"7\"></td></tr>\n";
+    		echo "<tr class=\"septr\" style=\"border: solid 1px #000 \" bgcolor=\"#7de890\"><td height=\"5\" colspan=\"7\"></td></tr>\n";
     		$serieNum++;
     		}
     }

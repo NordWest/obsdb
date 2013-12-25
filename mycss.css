@@ -9,5 +9,6 @@ and open the template in the editor.
 */
 
 td {text-align:center}
-tr.head {background-color:lightgreen}
+tr.head {background-color:limegreen}
 tr.body {background-color:whitesmoke}
+tr.sertr {background-color:lightgreen}
