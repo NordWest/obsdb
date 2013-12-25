@@ -19,7 +19,7 @@ $seas = getSeasonsFTP($lnk);
 /*$query = "SELECT value FROM settings WHERE name='servAddr'";
 $res = mysql_query($query) or die(mysql_error());
 $row = mysql_fetch_array($res);*/
-$servName = $_SERVER['SERVER_ADDR'].":".$_SERVER['SERVER_PORT'];
+$servName = $_SERVER['SERVER_ADDR'];
 
 $query = "SELECT * FROM $table WHERE obsDate=$obsDate and target LIKE '%$target%' order by DATETIMEOBS";
  
