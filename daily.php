@@ -4,14 +4,10 @@ require 'head.php';
 
  
 /* Соединяемся с базой данных */
-/*$hostname = "localhost"; // название/путь сервера, с MySQL
-$username = "fitsreader"; // имя пользователя (в Denwer`е по умолчанию "root")
-$password = "fitsreader"; // пароль пользователя (в Denwer`е по умолчанию пароль отсутствует, этот параметр можно оставить пустым)
-$dbName = "ccdobs_nap"; // название базы данных
- */
+
 $obsDate=$_GET['obsDate'];
-//$target = $_GET['target'];
 $target = str_replace("'", "", $_GET['target']);
+//$target = $_GET['target'];
  
 /* Таблица MySQL, в которой хранятся данные */
 $table = "fitsheader";
@@ -27,7 +23,7 @@ mysql_select_db($dbName) or die (mysql_error());
 //$query = "SELECT obsDate, DATETIMEOBS, Target, ra, de, observer FROM $table WHERE obsDate=$obsDate order by DATETIMEOBS";
 $query = "SELECT * FROM $table WHERE obsDate=$obsDate  and target LIKE '%$target%' order by DATETIMEOBS";
 
-/* echo($query);*/
+ //echo($query);
  
 /* Выполняем запрос. Если произойдет ошибка - вывести ее. */
 $res = mysql_query($query) or die(mysql_error());
@@ -63,7 +59,7 @@ $tend = 0;
 $i=0;
 $serieNum=1;
 $seas = getSeasonsFTP($lnk);
-$servName = $_SERVER['SERVER_ADDR'].":".$_SERVER['SERVER_PORT'];
+$servName = $_SERVER['SERVER_ADDR'];
 
 while ($row = mysql_fetch_array($res)) {
 

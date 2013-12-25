@@ -17,7 +17,7 @@ $lnk = mysql_connect($hostname, $username, $password) or die ("Не могу с�
 mysql_select_db($dbName) or die (mysql_error());
 $seas = getSeasonsLocal($lnk);
 
-$servName = $_SERVER['SERVER_ADDR'].":".$_SERVER['SERVER_PORT'];
+$servName = $_SERVER['SERVER_ADDR'];
  
 /* Составляем запрос для извлечения данных*/
 $query = "SELECT * FROM $table WHERE obsDate=$obsDate and target LIKE '%$target%' order by DATETIMEOBS";

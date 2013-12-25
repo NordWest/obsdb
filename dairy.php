@@ -49,7 +49,7 @@ echo ("
 /* Цикл вывода данных из базы конкретных полей */
 while ($row = mysql_fetch_array($res)) {
     echo "<tr>\n";
-    echo "<td><a href=\"daily.php?obsDate='".$row['obsDate']."'&target='".$target."'\">".$row['obsDate']."</td>\n";
+    echo "<td><a href=\"daily.php?obsDate='".$row['obsDate']."'&target='".urlencode($target)."'\">".$row['obsDate']."</td>\n";
     $obsDate = $row['obsDate'];
     $query = "SELECT DISTINCT observer FROM $table WHERE obsDate='$obsDate'";
   //  echo $query;
@@ -65,7 +65,7 @@ while ($row = mysql_fetch_array($res)) {
     	if($row2 = mysql_fetch_array($res2)) $realName = $row2['realName'];
     	else $realName = $observer;*/
     	$uncStr = urlencode($realName);
-    		echo ("<a href=\"observer.php?observerName='".$uncStr."'&date0='".$date0."'&date1='".$date1."'&target='".$target."'\">".$realName."</a>\n");
+    		echo ("<a href=\"observer.php?observerName='".$uncStr."'&date0='".$date0."'&date1='".$date1."'&target='".urlencode($target)."'\">".$realName."</a>\n");
     		//echo urlencode($realName);
     		
     	}
