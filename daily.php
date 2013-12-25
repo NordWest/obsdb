@@ -34,9 +34,9 @@ echo ("
 
 //require 'mathcap.php';
 
-echo "<a href=\"get_local_list.php?obsDate=$obsDate&target=$target\">get__local_list</a>";
-echo "<br><a href=\"get_ftp_list.php?obsDate=$obsDate&target=$target\">get__ftp_list</a>";
-echo "<br><a href=\"get_ftp_arch.php?obsDate=$obsDate&target=$target\">get__ftp_arch</a>";
+echo "<a href=\"get_local_list.php?obsDate=$obsDate&target=".urlencode($target)."\">get__local_list</a>";
+echo "<br><a href=\"get_ftp_list.php?obsDate=$obsDate&target=".urlencode($target)."\">get__ftp_list</a>";
+echo "<br><a href=\"get_ftp_arch.php?obsDate=$obsDate&target=".urlencode($target)."\">get__ftp_arch</a>";
 
 echo(" 
  
