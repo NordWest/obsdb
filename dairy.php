@@ -40,7 +40,7 @@ $res = mysql_query($query) or die(mysql_error());
 /* Выводим данные из таблицы */
 echo ("
 <table border=\"1\" cellpadding=\"0\" cellspacing=\"0\">
- <tr style=\"border: solid 1px #000\">
+ <tr class=\"head\" style=\"border: solid 1px #000\">
   <td align=\"center\"><b>Дата наблюдения</b></td>
   <td align=\"center\"><b>Наблюдатель </b></td>
  </tr>
@@ -48,7 +48,7 @@ echo ("
  
 /* Цикл вывода данных из базы конкретных полей */
 while ($row = mysql_fetch_array($res)) {
-    echo "<tr>\n";
+    echo "<tr class=\"body\">\n";
     echo "<td><a href=\"daily.php?obsDate='".$row['obsDate']."'&target='".urlencode($target)."'\">".$row['obsDate']."</td>\n";
     $obsDate = $row['obsDate'];
     $query = "SELECT DISTINCT observer FROM $table WHERE obsDate='$obsDate'";
