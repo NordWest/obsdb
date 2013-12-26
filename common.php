@@ -143,3 +143,23 @@ function getSeasonsLocal($lnk)
     }
     return $seasonLoc;
 }
+
+function getWhere($obsDate, $date0, $date1, $target, $expmin, $expmax)
+{
+    if($obsDate!='') $resArr[] = "obsDate=$obsDate";
+    if($date0!='') $resArr[] = "obsDate>='$date0'";
+    if($date1!='') $resArr[] = "obsDate<='$date1'";
+    if($target!='') $resArr[] = "target LIKE '%$target%'";
+    if($expmin!='') $resArr[] = "exptime>=$expmin";
+    if($expmax!='') $resArr[] = "exptime<=$expmax";
+    return implode(" and ", $resArr);
+}
+
+function getLink($obsDate, $target, $expmin, $expmax)
+{
+    if($obsDate!='') $resArr[] = "obsDate='$obsDate'";
+    if($target!='') $resArr[] = "target='".urlencode($target)."'";
+    if($expmin!='') $resArr[] = "expmin=$expmin";
+    if($expmax!='') $resArr[] = "expmax=$expmax";
+    return implode("&", $resArr);
+}

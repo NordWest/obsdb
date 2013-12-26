@@ -7,7 +7,8 @@ require 'head.php';
 
 $obsDate=$_GET['obsDate'];
 $target = str_replace("'", "", $_GET['target']);
-//$target = $_GET['target'];
+$expmin = $_GET['expmin'];
+$expmax = $_GET['expmax'];
  
 /* Таблица MySQL, в которой хранятся данные */
 $table = "fitsheader";
@@ -20,10 +21,11 @@ mysql_select_db($dbName) or die (mysql_error());
  
 /* Составляем запрос для извлечения данных из полей "name", "email", "theme",
 "message", "data" таблицы "test_table" */
-//$query = "SELECT obsDate, DATETIMEOBS, Target, ra, de, observer FROM $table WHERE obsDate=$obsDate order by DATETIMEOBS";
-$query = "SELECT * FROM $table WHERE obsDate=$obsDate  and target LIKE '%$target%' order by DATETIMEOBS";
+$whrStr = getWhere($obsDate, $date0, $date1, $target, $expmin, $expmax);
+$query = "SELECT * FROM $table WHERE $whrStr order by DATETIMEOBS";
+//$query = "SELECT * FROM $table WHERE obsDate=$obsDate  and target LIKE '%$target%' order by DATETIMEOBS";
 
- //echo($query);
+ echo($query);
  
 /* Выполняем запрос. Если произойдет ошибка - вывести ее. */
 $res = mysql_query($query) or die(mysql_error());

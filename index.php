@@ -90,10 +90,15 @@ $target = '';
 echo ("
  
 <h3>Запрос наблюдений: </h3>
+
 <form action=\"dairy.php\">
+  Дата наблюдений:<br>
   Начало<input id=\"date0\" name=\"date0\" value=\"".$date0."\" type=\"text\"/><br>
   Конец<input id=\"date1\" name=\"date1\" value=\"".$date1."\" type=\"text\"/><br>
   Объект<input id=\"target\" name=\"target\" value=\"".$target."\" type=\"text\"/><br>
+  Экспозиция:<br>
+  Минимальная<input id=\"target\" name=\"expmin\" value=\"".$expmin."\" type=\"text\"/><br>
+  Максимальная<input id=\"target\" name=\"expmax\" value=\"".$expmax."\" type=\"text\"/><br>
   <input type=\"submit\" text=\"Запрос\" value=\"Выбрать\"/>
 </form>
  

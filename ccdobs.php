@@ -66,7 +66,6 @@ while ($row = mysql_fetch_array($res)) {
     echo "<td>".deg_to_gms($row['de'])."</td>\n";
     echo "<td>".$row['observer']."</td>\n";
     echo "<td>".$row['originName']."</td>\n";
-    
 }
  
 echo ("</table>\n");

@@ -10,9 +10,11 @@ $dbName = "ccdobs_nap"; // название базы данных*/
 $date0 = $_GET['date0'];
 $date1 = $_GET['date1'];
 $target = str_replace("'", "", $_GET['target']);
+$expmin = $_GET['expmin'];
+$expmax = $_GET['expmax'];
 
 echo("<h3>Период: $date0 - $date1<h3>");
-echo("<h3>Объект: $target<h3>");
+if($target!='') echo("<h3>Объект: $target<h3>");
 
  
 /* Таблица MySQL, в которой хранятся данные */
@@ -31,7 +33,8 @@ mysql_query('set names utf8');
 "message", "data" таблицы "test_table" */
 //$target1 = str_replace("'", "", $target);
 //echo "$target<br>";
-$query = "SELECT DISTINCT obsDate FROM $table WHERE obsDate > '$date0' and obsDate < '$date1' and target LIKE '%$target%' order by obsDate desc";
+$whrStr = getWhere($obsDate, $date0, $date1, $target, $expmin, $expmax);
+$query = "SELECT DISTINCT obsDate FROM $table WHERE $whrStr order by obsDate desc";
 //echo $query;
  
 /* Выполняем запрос. Если произойдет ошибка - вывести ее. */
@@ -49,7 +52,9 @@ echo ("
 /* Цикл вывода данных из базы конкретных полей */
 while ($row = mysql_fetch_array($res)) {
     echo "<tr class=\"body\">\n";
-    echo "<td><a href=\"daily.php?obsDate='".$row['obsDate']."'&target='".urlencode($target)."'\">".$row['obsDate']."</td>\n";
+    $lnStr = getLink($row['obsDate'], $target, $expmin, $expmax);
+    echo "<td><a href=\"daily.php?$lnStr\">".$row['obsDate']."</td>\n";
+    //echo "<td><a href=\"daily.php?obsDate=".$row['obsDate']."&target='".urlencode($target)."'\">".$row['obsDate']."</td>\n";
     $obsDate = $row['obsDate'];
     $query = "SELECT DISTINCT observer FROM $table WHERE obsDate='$obsDate'";
   //  echo $query;
