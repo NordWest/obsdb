@@ -1,6 +1,6 @@
 <?php
 require 'common.php';
-require 'freeOld.php';
+//require 'freeOld.php';
 require 'head.php';
 
 $obsDate=$_GET['obsDate'];
@@ -8,7 +8,7 @@ $target = addslashes($_GET['target']);
 
 $table = "fitsheader";
 
-set_time_limit(8000);
+
 
 /* Создаем соединение */
 $lnk = mysql_connect($hostname, $username, $password) or die ("Не могу создать соединение");
@@ -25,7 +25,9 @@ $query = "SELECT * FROM $table WHERE obsDate=$obsDate and target LIKE '%$target%
 /* Выполняем запрос. Если произойдет ошибка - вывести ее. */
 $res = mysql_query($query) or die(mysql_error());
 $myfilename = tempnam("/mnt/ccdobs/ccdobsDB/tmp/", str_replace("'", '', $obsDate)."_").".zip";
-
+$myfilename = str_replace("/mnt/ccdobs", "ftp://".$servName, $myfilename);
+echo("<a href=\"$myfilename\">Скачать архив</a>");
+set_time_limit(8000);
 $zip = new ZipArchive(); //Создаём объект для работы с ZIP-архивами
 $zip->open($myfilename, ZIPARCHIVE::CREATE); //Открываем (создаём) архив archive.zip
 while ($row = mysql_fetch_array($res)) {
@@ -33,8 +35,7 @@ while ($row = mysql_fetch_array($res)) {
     $zip->addFile($fileName, $row['relFileName']);
 }
 $zip->close(); //Завершаем работу с архивом
-$myfilename = str_replace("/mnt/ccdobs", "ftp://".$servName, $myfilename);
-echo("<a href=\"$myfilename\">Скачать архив</a>");
+
 //file_force_download($myfilename);
 
 /*$myfile = fopen($myfilename, "a+");
