@@ -27,7 +27,7 @@ $res = mysql_query($query) or die(mysql_error());
 $myfilename = tempnam("/mnt/ccdobs/ccdobsDB/tmp/", str_replace("'", '', $obsDate)."_").".zip";
 $myftpname = str_replace("/mnt/ccdobs", "ftp://".$servName, $myfilename);
 echo("<a href=\"$myftpname\">Скачать архив</a>");
-set_time_limit(8000);
+ignore_user_abort(true);
 $zip = new ZipArchive(); //Создаём объект для работы с ZIP-архивами
 $zip->open($myfilename, ZIPARCHIVE::CREATE); //Открываем (создаём) архив archive.zip
 while ($row = mysql_fetch_array($res)) {
