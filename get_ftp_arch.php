@@ -8,7 +8,7 @@ $target = addslashes($_GET['target']);
 
 $table = "fitsheader";
 
-set_time_limit(180);
+set_time_limit(8000);
 
 /* Создаем соединение */
 $lnk = mysql_connect($hostname, $username, $password) or die ("Не могу создать соединение");
