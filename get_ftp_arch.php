@@ -26,7 +26,7 @@ $query = "SELECT * FROM $table WHERE obsDate=$obsDate and target LIKE '%$target%
 $res = mysql_query($query) or die(mysql_error());
 $myfilename = tempnam("/tmp/", str_replace("'", '', $obsDate)."_").".zip";
 $myfilename1 = tempnam("/mnt/ccdobs/ccdobsDB/tmp/", str_replace("'", '', $obsDate)."_").".zip";
-$myftpname = str_replace("/mnt/ccdobs", "ftp://".$servName, $myfilename);
+$myftpname = str_replace("/mnt/ccdobs", "ftp://".$servName, $myfilename1);
 
 set_time_limit(8000);
 $zip = new ZipArchive(); //Создаём объект для работы с ZIP-архивами
