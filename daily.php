@@ -25,7 +25,7 @@ $whrStr = getWhere($obsDate, $date0, $date1, $target, $expmin, $expmax);
 $query = "SELECT * FROM $table WHERE $whrStr order by DATETIMEOBS";
 //$query = "SELECT * FROM $table WHERE obsDate=$obsDate  and target LIKE '%$target%' order by DATETIMEOBS";
 
- echo($query);
+ //echo($query);
  
 /* Выполняем запрос. Если произойдет ошибка - вывести ее. */
 $res = mysql_query($query) or die(mysql_error());
