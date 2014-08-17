@@ -39,6 +39,8 @@ $query = "SELECT DISTINCT obsDate FROM $table WHERE $whrStr order by obsDate des
  
 /* Выполняем запрос. Если произойдет ошибка - вывести ее. */
 $res = mysql_query($query) or die(mysql_error());
+
+echo "<a href=\"get_local_list.php?obsDate=$date0&obsDate1=$date1&target=".urlencode($target)."\">get__local_list</a>";
  
 /* Выводим данные из таблицы */
 echo ("
